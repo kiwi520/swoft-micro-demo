@@ -10,7 +10,6 @@ use Swoft\Exception\Http\BadRequestException;
 use Swoft\Web\Response;
 use Swoft\Web\Request;
 use App\Tasks\EmailTask;
-//use App\Lib\Https;
 use Swoft\Task\Task;
 /**
  * Class IndexController
@@ -26,15 +25,12 @@ class IndexController
      * @View(template="index/index")
      * @return array
      */
-    public function index(Request $request)
+    public function index()
     {
-//        $url ="http://lv.app/ps";
-//        $str =['title'=>"phpinfo","content"=>"abcdefg"];
-//        $result = Https::postUrl($url,$str);
-
-//        $result = $request->input();
-//        return "2432";
-        $result = Task::deliver('email', 'sendEmail', ['smtpemailto'=>'1102861547@qq.com','mailtitle'=>'hello', 'mailcontent'=>'你好,world!!!'], Task::TYPE_COR);
+        $result = Task::deliver('email', 'sendEmail', ['1102861547@qq.com','hello', '你好,world!!!'], Task::TYPE_COR);
+//        $result = Task::deliver('test', 'corTask', [], Task::TYPE_COR);
+//        $result  = Task::deliver('test', 'corTask', ['params1', 'params2'], Task::TYPE_COR);
+//        return [$result];
         if($result){
             return $result;
         }else{

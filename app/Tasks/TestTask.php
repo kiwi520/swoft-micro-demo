@@ -43,16 +43,16 @@ class TestTask
      *
      * @return string
      */
-    public function corTask($p1, $p2)
-    {
-        static $status = 1;
-        $status++;
-        echo "this cor task \n";
-        App::trace("this is task log");
-        //        RedisClient::set('name', 'stelin boy');
-        $name = RedisClient::get('name');
-        return 'cor' . " $p1" . " $p2 " . $status . " " . $name;
-    }
+//    public function corTask($p1, $p2)
+//    {
+//        static $status = 1;
+//        $status++;
+//        echo "this cor task \n";
+//        App::trace("this is task log");
+//        //        RedisClient::set('name', 'stelin boy');
+//        $name = RedisClient::get('name');
+//        return 'cor' . " $p1" . " $p2 " . $status . " " . $name;
+//    }
 
     /**
      * 任务中使用mysql自动切换为同步mysql
@@ -129,22 +129,41 @@ class TestTask
         static $status = 1;
         $status++;
         echo "this async task \n";
-        $name = RedisClient::get('name');
+//        $name = RedisClient::get('name');
         App::trace("this is task log");
-        return 'async-' . $status . '-' . $name;
+        return 'async-' . $status . '-';
     }
 
+//    /**
+//     * crontab定时任务
+//     * 每一秒执行一次
+//     *
+//     * @Scheduled(cron="* * * * * *")
+//     */
+//    public function cronTask()
+//    {
+////        echo time() . "每一秒执行一次  \n";
+//        return 'cron';
+//    }
+
+
     /**
-     * crontab定时任务
-     * 每一秒执行一次
+     * 任务中,使用redis自动切换成同步阻塞redis
      *
-     * @Scheduled(cron="* * * * * *")
+     * @param mixed $p1
+     * @param mixed $p2
+     *
+     * @return string
      */
-    public function cronTask()
+    public function corTask($p1, $p2)
     {
-        echo time() . "每一秒执行一次  \n";
-        return 'cron';
+        static $status = 1;
+        $status++;
+        echo "this cor task \n";
+        App::trace("this is task log");
+        return "stelinfafa{$p1}-{$p2}";
     }
+
 
     /**
      * 每分钟第3-5秒执行

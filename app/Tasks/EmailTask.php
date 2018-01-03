@@ -9,18 +9,15 @@
 namespace App\Tasks;
 
 use App\Services\Email;
-use App\Models\Logic\IndexLogic;
+use Swoft\Bean\Annotation\Task;
 
-class EmailTask
-{
-    /**
-     * 逻辑层
-     *
-     * @Inject()
-     * @var IndexLogic
-     */
-    private $logic;
 
+/**
+ * 邮件task
+ *
+ * @Task("email")
+ */
+class EmailTask{
 
     private $smtpserver = "smtp.163.com";
 
@@ -55,6 +52,10 @@ class EmailTask
         }else{
             return "未知错误";
         }
+    }
+
+    public function onFinish(){
+
     }
 
 }
