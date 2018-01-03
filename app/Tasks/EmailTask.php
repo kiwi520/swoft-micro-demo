@@ -30,9 +30,9 @@ class EmailTask
     private  $smtpusermail = "roczhmg@163.com";
 
     //SMTP用户名，不加@163.com
-    private  $smtpuser = "cqc";
+    private  $smtpuser = "roczhmg";
     //SMTP用户密码
-    private $smtppass = "wtf";
+    private $smtppass = "zhmg201718";
 
 
     /**
@@ -48,12 +48,12 @@ class EmailTask
         $state = $smtp->sendmail($smtpemailto, $this->smtpusermail, $mailtitle, $mailcontent, $mailtype);
         //检查发送状态
         if($state==""){
-            echo "邮件发送失败，请检查密码或其他设置";
+            return "邮件发送失败，请检查密码或其他设置";
         }else if(strlen($state)!=0){
             //发送成功
-            echo "邮件发送成功";
+            return "邮件发送成功";
         }else{
-            echo "未知错误";
+            return "未知错误";
         }
     }
 

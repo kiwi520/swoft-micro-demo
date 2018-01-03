@@ -7,7 +7,7 @@ use App\Controllers\IndexController;
 $router = \Swoft\App::getBean('httpRouter');
 
 //$router->get('/', IndexController::class);
-$router->post('/a', "App\Controllers\IndexController@index");
+$router->get('/a', "App\Controllers\IndexController@index");
 $router->get('/user/{uid}/book/{bid}/{bool}/{name}', function (bool $bool, Request $request,  int $bid, string $name, int $uid, Response $response){
     return ['clouse', $bid, $uid, $bool, $name, get_class($request), get_class($response)];
 });

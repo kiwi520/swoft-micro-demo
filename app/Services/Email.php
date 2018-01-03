@@ -9,8 +9,7 @@
 namespace App\Services;
 
 
-class Email
-{
+class Email {
     /* Public Variables */
     var $smtp_port;
     var $time_out;
@@ -24,7 +23,7 @@ class Email
     /* Private Variables */
     var $sock;
     /* Constractor */
-    function smtp($relay_host = "", $smtp_port = 25, $auth = false, $user, $pass) {
+    function __construct($relay_host = "", $smtp_port = 25, $auth = false, $user, $pass) {
         $this->debug = FALSE;
         $this->smtp_port = $smtp_port;
         $this->relay_host = $relay_host;

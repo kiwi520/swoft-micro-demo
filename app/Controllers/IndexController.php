@@ -9,8 +9,9 @@ use Swoft\Contract\Arrayable;
 use Swoft\Exception\Http\BadRequestException;
 use Swoft\Web\Response;
 use Swoft\Web\Request;
-use App\Lib\Https;
-
+use App\Tasks\EmailTask;
+//use App\Lib\Https;
+use Swoft\Task\Task;
 /**
  * Class IndexController
  * @Controller()
@@ -31,7 +32,9 @@ class IndexController
 //        $str =['title'=>"phpinfo","content"=>"abcdefg"];
 //        $result = Https::postUrl($url,$str);
 
-        $result = $request->input();
+//        $result = $request->input();
+//        return "2432";
+        $result = Task::deliver('email', 'sendEmail', ['smtpemailto'=>'1102861547@qq.com','mailtitle'=>'hello', 'mailcontent'=>'你好,world!!!'], Task::TYPE_COR);
         if($result){
             return $result;
         }else{
