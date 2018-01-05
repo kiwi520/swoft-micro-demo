@@ -160,8 +160,8 @@ class TestTask
         static $status = 1;
         $status++;
         echo "this cor task \n";
-        App::trace("this is task log");
-        return "stelinfafa{$p1}-{$p2}";
+//        App::trace("this is task log");
+        return "sasa $status";
     }
 
 

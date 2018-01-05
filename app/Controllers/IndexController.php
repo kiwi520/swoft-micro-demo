@@ -20,22 +20,20 @@ use Swoft\Task\Task;
 class IndexController
 {
 
-    /**
-     * @RequestMapping()
-     * @View(template="index/index")
-     * @return array
-     */
     public function index()
     {
-        $result = Task::deliver('email', 'sendEmail', ['1102861547@qq.com','hello', '你好,world!!!'], Task::TYPE_COR);
-//        $result = Task::deliver('test', 'corTask', [], Task::TYPE_COR);
+
+
+        $result = Task::deliver('email', 'sendEmail', ['1102861547@qq.com','hellowwrew', '你好,ddddd!!!'], Task::TYPE_COR);
+////        $result = Task::deliver('test', 'corTask', [], Task::TYPE_COR);
 //        $result  = Task::deliver('test', 'corTask', ['params1', 'params2'], Task::TYPE_COR);
-//        return [$result];
-        if($result){
-            return $result;
-        }else{
-            return "no";
-        }
+        return [$result];
+////        return "dsd";
+//        if($result){
+//            return $result;
+//        }else{
+//            return "no";
+//        }
     }
 
 
@@ -61,11 +59,7 @@ class IndexController
          }
     }
 
-    /**
-     * @RequestMapping()
-     * @View(template="index/index")
-     * @return \Swoft\Contract\Arrayable|__anonymous@836
-     */
+
     public function arrayable()
     {
         return (new class implements Arrayable

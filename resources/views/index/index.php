@@ -72,25 +72,6 @@
     </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-
-    <div class="content">
-        <div class="title m-b-md">
-            <?= $name ?>
-        </div>
-
-        <?php foreach ($notes as $note): ?>
-            <div class="notes m-b-sm">
-                <?= $note ?>
-            </div>
-        <?php endforeach; ?>
-
-        <div class="links">
-            <?php foreach ($links as $link): ?>
-                <a href="<?= $link['link'] ?>"><?= $link['name'] ?></a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
+    <?php print_r($result);?>
 </body>
 </html>

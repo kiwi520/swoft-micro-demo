@@ -7,10 +7,10 @@
  */
 
 namespace App\Tasks;
-
+use Swoft\App;
 use App\Services\Email;
+use App\Event\Events\EmailEvent;
 use Swoft\Bean\Annotation\Task;
-
 
 /**
  * 邮件task
@@ -21,7 +21,7 @@ class EmailTask{
 
     private $smtpserver = "smtp.163.com";
 
-    //SMTP端口号?
+    //SMTP端口号
     private  $smtpserverport = 25;
     //SMTP发邮件的邮箱
     private  $smtpusermail = "roczhmg@163.com";
@@ -31,7 +31,6 @@ class EmailTask{
     //SMTP用户密码
     private $smtppass = "zhmg201718";
 
-
     /**
      * @param $smtpemailto  发送给谁(邮件接收者)
      * @param $mailtitle    邮件主题
@@ -39,23 +38,26 @@ class EmailTask{
      * @param $mailtype     发送格式
      */
     public function sendEmail($smtpemailto, $mailtitle, $mailcontent, $mailtype ='html'){
+        App::trigger(EmailEvent::EMAIL_AFTER_REQUEST);
         //实例化对象
         $smtp = new Email($this->smtpserver,$this->smtpserverport,true,$this->smtpuser,$this->smtppass);
 
         $state = $smtp->sendmail($smtpemailto, $this->smtpusermail, $mailtitle, $mailcontent, $mailtype);
         //检查发送状态
         if($state==""){
-            return "邮件发送失败，请检查密码或其他设置";
+            print_r("邮件发送失败，请检查密码或其他设置");
         }else if(strlen($state)!=0){
-            //发送成功
-            return "邮件发送成功";
+            App::trigger(EmailEvent::EMAIL_AFTER_REQUEST);
         }else{
             return "未知错误";
         }
     }
 
-    public function onFinish(){
-
+    public function beforeRequest(){
+        return $this->message ="即将发送邮件";
+    }
+    public function afterRequest(){
+        return $this->message ="您的邮件已发送成功,请注意查收!!!";
     }
 
 }
