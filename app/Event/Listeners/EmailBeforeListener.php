@@ -18,7 +18,7 @@ use Swoft\Event\EventHandlerInterface;
 /**
  * 任务前置事件
  *
- * @Listener(EmailEvent::ON_EMAIL_BEFORE_REQUEST)
+ * @Listener(EmailEvent::EMAIL_BEFORE_SEND)
  * @uses      EmailBeforeListener
  * @version   2018年01月5日
  * @author    kiwi <roczhmg@163.com>
@@ -33,8 +33,8 @@ class EmailBeforeListener implements EventHandlerInterface{
      */
     public function handle(EventInterface $event)
     {
-        echo  "ok";
 //        App::getLogger()->appendNoticeLog();
-       return "即将发送邮件";
+//        App::error("即将发送邮件");
+         return "即将发送邮件";
     }
 }

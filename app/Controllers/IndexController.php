@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Swoft\App;
+use App\Event\Events\EmailEvent;
 use Swoft\Bean\Annotation\Controller;
 use Swoft\Bean\Annotation\RequestMapping;
 use Swoft\Bean\Annotation\View;
@@ -23,11 +25,12 @@ class IndexController
     public function index()
     {
 
-
+        App::trigger(EmailEvent::EMAIL_BEFORE_SEND,null,["asd"]);
+//        echo phpinfo();
         $result = Task::deliver('email', 'sendEmail', ['1102861547@qq.com','hellowwrew', '你好,ddddd!!!'], Task::TYPE_COR);
-////        $result = Task::deliver('test', 'corTask', [], Task::TYPE_COR);
-//        $result  = Task::deliver('test', 'corTask', ['params1', 'params2'], Task::TYPE_COR);
-        return [$result];
+        $error = App::trigger(EmailEvent::EMAIL_AFTER_SEND,null,["fgh"]);
+        $result['error']= $error;
+        return $result;
 ////        return "dsd";
 //        if($result){
 //            return $result;

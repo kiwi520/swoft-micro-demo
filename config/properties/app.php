@@ -11,6 +11,8 @@ return [
         'App\Process',
         'App\Breaker',
         'App\Pool',
+        'App\Event\Events',
+        'App\Event\Listeners'
     ],
     'I18n'              => [
         'sourceLanguage' => '@root/resources/messages/',

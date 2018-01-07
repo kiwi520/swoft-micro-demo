@@ -8,7 +8,6 @@
 
 namespace App\Event\Listeners;
 use Swoft\App;
-use Swoft\Base\RequestContext;
 use App\Event\Events\EmailEvent;
 use Swoft\Event\EventInterface;
 use Swoft\Bean\Annotation\Listener;
@@ -18,8 +17,8 @@ use Swoft\Event\EventHandlerInterface;
 /**
  * 任务后置事件
  *
- * @Listener(EmailEvent::ON_EMAIL_AFTER_REQUEST)
- * @uses      EmailBeforeListener
+ * @Listener(EmailEvent::EMAIL_AFTER_SEND)
+ * @uses      EmailAfterListener
  * @version   2018年01月5日
  * @author    kiwi <roczhmg@163.com>
  * @copyright Copyright 2010-2018 swoft software
@@ -33,12 +32,6 @@ class EmailAfterListener implements EventHandlerInterface{
      */
     public function handle(EventInterface $event)
     {
-        $contextData = [
-            'requestTime' => microtime(true)
-        ];
-        RequestContext::setContextData($contextData);
-
-        // 日志初始化
-        App::getLogger()->initialize();
+       App::error("邮件已发送");
     }
 }
